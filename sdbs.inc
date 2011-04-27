@@ -17,6 +17,7 @@ echo "Building in $PREFIX"
 EPREFIX=${EPREFIX:-$PREFIX}
 WORKDIR=${WORKDIR:-$PREFIX/src}
 
+[ -d $PREFIX/bin ] || mkdir -p $PREFIX/bin
 [ -d $WORKDIR ] || mkdir -p $WORKDIR
 
 # default
@@ -149,7 +150,6 @@ function remove () {
 function perlmodule (){
     path=$1;shift
     pack=${1:-""}
-    [ -d $PREFIX/bin ] || mkdir -p $PREFIX/bin
     [ -e $PREFIX/bin/cpanm ] || wget --no-check-certificate -O $PREFIX/bin/cpanm cpanmin.us && chmod 755 $PREFIX/bin/cpanm
     cpanm "$path$pack"
     [ "$KEEP" = "YES" ] || rm -rf $PREFIX/work $PREFIX/latest-build
