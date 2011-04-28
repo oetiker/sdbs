@@ -27,7 +27,8 @@ for module in \
         Digest::SHA1 \
         Net::SNMP \
         URI::Escape \
-        Date::Parse\
+        Date::Parse \
+        Apache::Session \
 ; do
     perlmodule $module
 done
