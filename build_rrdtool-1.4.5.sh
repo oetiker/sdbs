@@ -4,7 +4,7 @@
 
 simplebuild ftp://xmlsoft.org/libxml2/ libxml2-2.7.8.tar.gz --without-python
 
-simplebuild ftp://ftp.simplesystems.org/pub/libpng/png/src/ libpng-1.5.2.tar.gz
+simplebuild ftp://ftp.simplesystems.org/pub/libpng/png/src/ libpng-1.4.7.tar.gz
 
 simplebuild http://download.savannah.gnu.org/releases/freetype/ freetype-2.4.4.tar.gz \
      CFLAGS="-O3 -fPIC"
