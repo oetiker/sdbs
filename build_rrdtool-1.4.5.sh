@@ -2,6 +2,8 @@
 
 . `dirname $0`/sdbs.inc
 
+simplebuild http://ftp.gnu.org/pub/gnu/gettext/ gettext-0.18.1.1.tar.gz CFLAGS="-O3 -fPIC"
+
 simplebuild ftp://xmlsoft.org/libxml2/ libxml2-2.7.8.tar.gz --without-python
 
 simplebuild ftp://ftp.simplesystems.org/pub/libpng/png/src/ libpng-1.4.7.tar.gz
