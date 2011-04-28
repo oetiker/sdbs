@@ -2,7 +2,7 @@
 set -o errexit
 # don't try to remember where things are
 set +o hashall
-## do not tollerate unset variables
+## do not tolerate unset variables
 set -u
 
 if [ ${1:-""} = "" ]; then
