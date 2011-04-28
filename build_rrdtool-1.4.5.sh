@@ -17,10 +17,7 @@ simplebuild http://www.freedesktop.org/software/fontconfig/release/ fontconfig-2
 simplebuild http://cairographics.org/releases/ pixman-0.20.2.tar.gz CFLAGS="-O3 -fPIC"
 
 simplebuild http://cairographics.org/releases/ cairo-1.10.2.tar.gz \
-        --enable-xlib=no \
-        --enable-xlib-render=no \
-        --enable-win32=no \
-        CFLAGS="-O3 -fPIC"
+     --enable-xlib=no --enable-xlib-render=no --enable-win32=no  CFLAGS="-O3 -fPIC"
 
 simplebuild http://ftp.gnome.org/pub/gnome/sources/glib/2.28/ glib-2.28.6.tar.gz CFLAGS="-O3 -fPIC"
 
