@@ -20,37 +20,10 @@ simplebuild http://cairographics.org/releases/ cairo-1.10.2.tar.gz \
         --enable-win32=no \
         CFLAGS="-O3 -fPIC"
 
-simplebuild http://ftp.gnome.org/pub/gnome/sources/glib/2.28/glib-2.28.6.tar.gz CFLAGS="-O3 -fPIC"
+simplebuild http://ftp.gnome.org/pub/gnome/sources/glib/2.28/ glib-2.28.6.tar.gz CFLAGS="-O3 -fPIC"
 
-simplebuild http://ftp.gnome.org/pub/GNOME/sources/pango/1.28/pango-1.28.4.tar.gz --without-x CFLAGS="-O3 -fPIC"
+simplebuild http://ftp.gnome.org/pub/GNOME/sources/pango/1.28/ pango-1.28.4.tar.gz --without-x CFLAGS="-O3 -fPIC"
+
+simplebuild http://oss.oetiker.ch/rrdtool/pub/ rrdtool-1.4.5.tar.gz --with-perl-options="PREFIX=$PREFIX LIB=$PREFIX/lib/perl5"
 
 
-
-
-if prepare http://download.oracle.com/berkeley-db/ db-4.8.30.tar.gz ; then
-    cd build_unix
-    ../dist/configure \
-        "--prefix=${PREFIX}"
-    make
-    make install
-    touch $WORKDIR/db-4.8.30.tar.gz.ok
-fi
-
-export BERKELEYDB_INCLUDE=$PREFIX/include
-export BERKELEYDB_LIB=$PREFIX/lib
-
-for module in \
-        XML::LibXML \
-        BerkeleyDB \
-        Template \
-        Proc::Daemon \
-        Crypt::DES \
-        Crypt::Rijndael \
-        Digest::HMAC \
-        Digest::SHA1 \
-        Net::SNMP \
-        URI::Escape \
-        Date::Parse\
-; do
-    perlmodule $module
-done
