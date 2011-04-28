@@ -5,6 +5,8 @@ if prepare http://search.cpan.org/CPAN/authors/id/R/RJ/RJBS perl-5.12.3.tar.gz; 
    make clean || true
    ./Configure -de \
         -Ui_db \
+        -Dprivlib=$PREFIX/lib/perl \
+        -Dsitelib=$PREFIX/lib/perl5 \
         -Dprefix=$PREFIX \
         -Dperlpath="$PREFIX/bin/perl" \
         -Dstartperl="#!$PREFIX/bin/perl" \
