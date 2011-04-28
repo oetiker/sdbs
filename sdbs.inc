@@ -17,6 +17,7 @@ echo "Building in $PREFIX"
 EPREFIX=${EPREFIX:-$PREFIX}
 WORKDIR=${WORKDIR:-$PREFIX/src}
 
+[ -d $PREFIX/bin ] || mkdir -p $PREFIX/bin
 [ -d $WORKDIR ] || mkdir -p $WORKDIR
 
 # default
