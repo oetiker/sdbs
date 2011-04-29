@@ -31,7 +31,7 @@ for module in \
         Apache::Session \
         JSON::XS \
         JSON \
-        CGI::Fast
+        CGI::Fast \
 ; do
     perlmodule $module
 done
