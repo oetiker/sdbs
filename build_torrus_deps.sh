@@ -29,6 +29,9 @@ for module in \
         URI::Escape \
         Date::Parse \
         Apache::Session \
+        JSON::XS \
+        JSON \
+        CGI::Fast
 ; do
     perlmodule $module
 done
