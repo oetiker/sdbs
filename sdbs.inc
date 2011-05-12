@@ -5,13 +5,13 @@ set +o hashall
 ## do not tolerate unset variables
 set -u
 
-if [ ${1:-""} = "" ]; then
-     bindir=`dirname "$0"`
-     export PREFIX=`cd $bindir/..;pwd`/thirdparty
-else
-     export PREFIX="$1"
-fi
+PREFIX=${1:-${PREFIX}}
 
+if [ ${PREFIX:-""} = "" ]; then
+     bindir=`dirname "$0"`
+     PREFIX=`cd $bindir/..;pwd`/thirdparty
+fi
+export PREFIX
 echo "Building in $PREFIX"
 
 EPREFIX=${EPREFIX:-$PREFIX}
