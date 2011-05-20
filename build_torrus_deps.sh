@@ -32,6 +32,7 @@ for module in \
         JSON::XS \
         JSON \
         CGI::Fast \
+        FCGI \
 ; do
     perlmodule $module
 done
