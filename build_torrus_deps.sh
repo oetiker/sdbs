@@ -32,7 +32,7 @@ for module in \
         JSON::XS \
         JSON \
         CGI::Fast \
-        FCGI \
+        MSTROUT/FCGI-0.69.tar.gz \
 ; do
     perlmodule $module
 done
