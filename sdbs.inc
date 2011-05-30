@@ -5,7 +5,7 @@ set +o hashall
 ## do not tolerate unset variables
 set -u
 
-PREFIX=${1:-${PREFIX}}
+PREFIX=${1:-${PREFIX:-""}}
 
 if [ ${PREFIX:-""} = "" ]; then
      bindir=`dirname "$0"`
