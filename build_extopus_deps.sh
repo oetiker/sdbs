@@ -16,7 +16,6 @@ for module in \
     DBD::SQLite \
     JSON::XS \
     Mojo::JSON::Any \
-    Text::CSV_XS \
 ; do
     perlmodule $module
 done
