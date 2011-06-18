@@ -13,6 +13,8 @@ for module in \
     JSON::XS \
     Mojo::JSON::Any \
     Text::CSV_XS \
+    Excel::Writer::XLSX  \
+    Spreadsheet::WriteExcel \
 ; do
     perlmodule $module
 done
