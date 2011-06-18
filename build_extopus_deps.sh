@@ -2,7 +2,11 @@
 
 . `dirname $0`/sdbs.inc
 
-simplebuild http://www.python.org/ftp/python/2.7.1 Python-2.7.1.tgz
+if python -V 2>&1 | egrep -q '2.[5-9]'; then
+:
+else
+   simplebuild http://www.python.org/ftp/python/2.7.1 Python-2.7.1.tgz
+fi
 
 for module in \
     Mojolicious \
@@ -12,7 +16,6 @@ for module in \
     DBD::SQLite \
     JSON::XS \
     Mojo::JSON::Any \
-    Text::CSV_XS \
     Excel::Writer::XLSX  \
     Spreadsheet::WriteExcel \
 ; do
