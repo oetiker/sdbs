@@ -2,7 +2,10 @@
 
 . `dirname $0`/sdbs.inc
 
-simplebuild http://zlib.net/ zlib-1.2.5.tar.gz CFLAGS="-O3 -fPIC"
+if prepare http://zlib.net/ zlib-1.2.5.tar.gz; then
+   CFLAGS="-O3 -fPIC" ./configure --prefix=$PREFIX
+   CFLAGS="-O3 -fPIC" make install
+fi
 
 simplebuild http://ftp.gnu.org/pub/gnu/gettext/ gettext-0.18.1.1.tar.gz CFLAGS="-O3 -fPIC"
 
