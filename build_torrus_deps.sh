@@ -3,6 +3,7 @@
 . `dirname $0`/sdbs.inc
 
 echo "you may ./build_perl-5.14.1.sh to get a recent version of perl up"
+sleep 3
 
 export PATH=$PREFIX/bin:$PATH
 
