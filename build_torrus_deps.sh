@@ -2,7 +2,10 @@
 
 . `dirname $0`/sdbs.inc
 
-echo "you may ./build_perl-5.14.1.sh to get a recent version of perl up"
+echo "you may ./build_perl-5.12.4.sh to get a recent version of perl up"
+echo "5.14.1 does not work because FCGI-0.69 does not build"
+echo "until https://rt.cpan.org/Public/Bug/Display.html?id=68380 if fixed we are stuck"
+
 sleep 3
 
 export PATH=$PREFIX/bin:$PATH
@@ -37,7 +40,7 @@ for module in \
         JSON::XS \
         JSON \
         CGI::Fast \
-        FCGI \
+        MSTROUT/FCGI-0.69.tar.gz \
 ; do
     perlmodule $module
 done
