@@ -19,7 +19,7 @@ simplebuild http://download.savannah.gnu.org/releases/freetype/ freetype-2.4.6.t
 simplebuild http://www.freedesktop.org/software/fontconfig/release/ fontconfig-2.8.0.tar.gz \
      CFLAGS="-O3 -fPIC"
 
-simplebuild http://cairographics.org/releases/ pixman-0.20.2.tar.gz CFLAGS="-O3 -fPIC"
+simplebuild http://cairographics.org/releases/ pixman-0.22.2.tar.gz CFLAGS="-O3 -fPIC"
 
 simplebuild http://cairographics.org/releases/ cairo-1.10.2.tar.gz \
      --enable-xlib=no --enable-xlib-render=no --enable-win32=no  CFLAGS="-O3 -fPIC"
