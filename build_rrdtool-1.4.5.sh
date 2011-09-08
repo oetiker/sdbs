@@ -5,9 +5,11 @@
 if prepare http://zlib.net/ zlib-1.2.5.tar.gz; then
    CFLAGS="-O3 -fPIC" ./configure --prefix=$PREFIX
    CFLAGS="-O3 -fPIC" make install
+   touch $WORKDIR/zlib-1.2.5.tar.gz.ok
 fi
 
-simplebuild http://ftp.gnu.org/pub/gnu/gettext/ gettext-0.18.1.1.tar.gz CFLAGS="-O3 -fPIC"
+simplebuild http://ftp.gnu.org/pub/gnu/gettext/ gettext-0.18.1.1.tar.gz CFLAGS="-O3 -fPIC" \
+        --disable-java
 
 simplebuild ftp://xmlsoft.org/libxml2/ libxml2-2.7.8.tar.gz --without-python
 
@@ -19,7 +21,9 @@ simplebuild http://download.savannah.gnu.org/releases/freetype/ freetype-2.4.6.t
 simplebuild http://www.freedesktop.org/software/fontconfig/release/ fontconfig-2.8.0.tar.gz \
      CFLAGS="-O3 -fPIC"
 
-simplebuild http://cairographics.org/releases/ pixman-0.22.2.tar.gz CFLAGS="-O3 -fPIC"
+simplebuild http://cairographics.org/releases/ pixman-0.22.2.tar.gz CFLAGS="-O3 -fPIC" \
+        --disable-static-testprogs \
+        --disable-gtk        
 
 simplebuild http://cairographics.org/releases/ cairo-1.10.2.tar.gz \
      --enable-xlib=no --enable-xlib-render=no --enable-win32=no  CFLAGS="-O3 -fPIC"
