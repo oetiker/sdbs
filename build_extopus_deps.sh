@@ -10,6 +10,7 @@ fi
 
 for module in \
     Mojolicious \
+    Mojo::Server::FastCGI \
     MojoX::Dispatcher::Qooxdoo::Jsonrpc \
     Config::Grammar \
     SIAM \
