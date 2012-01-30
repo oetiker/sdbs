@@ -2,17 +2,13 @@
 
 . `dirname $0`/sdbs.inc
 
-echo "You may want to build Perl before running this"
-echo "Packages required: zlib-devel and libxml2-devel (RHEL)"
-echo "libz-dev libxml2-dev (Debian)"
+echo "Required prerequisites (recommended to build with SDBS): "
+echo "  perl 5.12.4 or 5.14.2"
+echo "  rrdtool 1.4.5 or higher"
 
 sleep 3
 
 export PATH=$PREFIX/bin:$PATH
-
-# this needs some more work. 
-# It still fails without zlib-devel and libxml2-devel
-# simplebuild http://xmlsoft.org/sources/ libxml2-2.7.8.tar.gz --without-python
 
 if prepare http://download.oracle.com/berkeley-db/ db-4.8.30.tar.gz ; then
     cd build_unix
