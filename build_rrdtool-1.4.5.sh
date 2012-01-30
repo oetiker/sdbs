@@ -2,7 +2,7 @@
 
 . `dirname $0`/sdbs.inc
 
-if prepare http://zlib.net/ zlib-1.2.5.tar.gz; then
+if prepare http://switch.dl.sourceforge.net/project/libpng/zlib/1.2.5/ zlib-1.2.5.tar.gz; then
    CFLAGS="-O3 -fPIC" ./configure --prefix=$PREFIX
    CFLAGS="-O3 -fPIC" make install
    touch $WORKDIR/zlib-1.2.5.tar.gz.ok
@@ -11,9 +11,9 @@ fi
 simplebuild http://ftp.gnu.org/pub/gnu/gettext/ gettext-0.18.1.1.tar.gz CFLAGS="-O3 -fPIC" \
         --disable-java
 
-simplebuild ftp://xmlsoft.org/libxml2/ libxml2-2.7.8.tar.gz --without-python
+simplebuild http://xmlsoft.org/sources/ libxml2-2.7.8.tar.gz --without-python
 
-simplebuild ftp://ftp.simplesystems.org/pub/libpng/png/src/ libpng-1.4.8.tar.gz
+simplebuild http://switch.dl.sourceforge.net/project/libpng/libpng14/1.4.8/ libpng-1.4.8.tar.gz
 
 simplebuild http://download.savannah.gnu.org/releases/freetype/ freetype-2.4.6.tar.gz \
      CFLAGS="-O3 -fPIC"
