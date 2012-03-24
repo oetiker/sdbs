@@ -5,6 +5,12 @@ set +o hashall
 ## do not tolerate unset variables
 set -u
 
+## check if wget is available
+if [ x`which wget` = x ]; then
+ echo "cannot find wget in PATH. Aborting"
+ exit 1
+fi 
+
 PREFIX=${1:-${PREFIX:-""}}
 
 if [ ${PREFIX:-""} = "" ]; then
