@@ -60,6 +60,9 @@ function prepare () {
      *.tar.gz)
          SRCDIR=${SRCDIR:-$WORKDIR/`basename $2 .tar.gz`}
          [ -d $SRCDIR ] || gunzip -c $2 | tar xf -;;
+     *.tar.xz)
+         SRCDIR=${SRCDIR:-$WORKDIR/`basename $2 .tar.xz`}
+         [ -d $SRCDIR ] || xz --decompress --stdout $2 | gtar xf -;;
      *.tgz)
          SRCDIR=${SRCDIR:-$WORKDIR/`basename $2 .tgz`}
          [ -d $SRCDIR ] || gunzip -c $2|tar xf -;;
