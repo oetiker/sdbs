@@ -56,19 +56,19 @@ function prepare () {
    case $2 in
      *.tar.bz2)
          SRCDIR=${SRCDIR:-$WORKDIR/`basename $2 .tar.bz2`}
-         [ -d $SRCDIR ] || bunzip2 -c $2 | gtar xf -;;
+         [ -d $SRCDIR ] || bunzip2 -c $2 | tar xf -;;
      *.tar.gz)
          SRCDIR=${SRCDIR:-$WORKDIR/`basename $2 .tar.gz`}
          [ -d $SRCDIR ] || gunzip -c $2 | tar xf -;;
      *.tar.xz)
          SRCDIR=${SRCDIR:-$WORKDIR/`basename $2 .tar.xz`}
-         [ -d $SRCDIR ] || xz --decompress --stdout $2 | gtar xf -;;
+         [ -d $SRCDIR ] || xz --decompress --stdout $2 | tar xf -;;
      *.tgz)
          SRCDIR=${SRCDIR:-$WORKDIR/`basename $2 .tgz`}
-         [ -d $SRCDIR ] || gunzip -c $2|tar xf -;;
+         [ -d $SRCDIR ] || gunzip -c $2 | tar xf -;;
      *.tar.Z)
          SRCDIR=${SRCDIR:-$WORKDIR/`basename $2 .tar.Z`}
-         [ -d $SRCDIR ] || gunzip -c $2|tar xf -;;
+         [ -d $SRCDIR ] || gunzip -c $2 | tar xf -;;
      *.tar)
          SRCDIR=${SRCDIR:-$WORKDIR/`basename $2 .tar`}
          [ -d $SRCDIR ] || tar xf $2;;
