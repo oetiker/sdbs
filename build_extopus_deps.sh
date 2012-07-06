@@ -15,8 +15,6 @@ for module in \
     Config::Grammar \
     SIAM \
     DBD::SQLite \
-    JSON::XS \
-    Mojo::JSON::Any \
     Excel::Writer::XLSX  \
     Spreadsheet::WriteExcel \
 ; do
