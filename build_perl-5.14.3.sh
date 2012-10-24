@@ -7,7 +7,7 @@ export PERL=
 export PERL_CPANM_HOME=
 export PERL_CPANM_OPT=
 
-if prepare http://www.cpan.org/src/5.0 perl-5.12.4.tar.gz; then
+if prepare http://www.cpan.org/src/5.0 perl-5.14.3.tar.gz; then
    make clean || true
    ./Configure -de \
         -Ui_db \
@@ -19,7 +19,8 @@ if prepare http://www.cpan.org/src/5.0 perl-5.12.4.tar.gz; then
         -Dusethreads -de
    make
    make install
-   touch $WORKDIR/perl-5.12.4.tar.gz.ok
+   touch $WORKDIR/perl-5.14.3.tar.gz.ok
 fi
 
 # EOF
+
