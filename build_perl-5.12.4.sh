@@ -1,7 +1,13 @@
 #!/bin/bash
 . `dirname $0`/sdbs.inc
 
-if prepare http://search.cpan.org/CPAN/authors/id/L/LB/LBROCARD perl-5.12.4.tar.gz; then
+# unset PERL settings in sdbs for building perl
+export PERL5LIB=
+export PERL=
+export PERL_CPANM_HOME=
+export PERL_CPANM_OPT=
+
+if prepare http://www.cpan.org/src/5.0 perl-5.12.4.tar.gz; then
    make clean || true
    ./Configure -de \
         -Ui_db \
@@ -16,5 +22,4 @@ if prepare http://search.cpan.org/CPAN/authors/id/L/LB/LBROCARD perl-5.12.4.tar.
    touch $WORKDIR/perl-5.12.4.tar.gz.ok
 fi
 
-
-
+# EOF
