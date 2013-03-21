@@ -23,7 +23,7 @@ simplebuild http://ftp.gnu.org/pub/gnu/gettext/ gettext-0.18.1.1.tar.gz \
 simplebuild http://xmlsoft.org/sources/ libxml2-2.7.8.tar.gz --without-python
 
 simplebuild \
-http://switch.dl.sourceforge.net/project/libpng/libpng14/older-releases/1.4.9/ \
+http://garr.dl.sourceforge.net/project/libpng/libpng14/older-releases/1.4.9/ \
 libpng-1.4.9.tar.gz CPPFLAGS="-I${PREFIX}/include" LDFLAGS="-L${PREFIX}/lib"
 
 simplebuild http://switch.dl.sourceforge.net/project/expat/expat/2.0.1/ \
