@@ -29,6 +29,9 @@ WORKDIR=${WORKDIR:-$PREFIX/src}
 # default
 KEEP=no
 
+# Our own repository with dependencies
+DEPS_ARCHIVE=${DEPS_ARCHIVE:-http://sdbs.oetiker.ch/pub/}
+
 # make sure we find anything we preinstall
 export PATH=$EPREFIX/bin:$PATH
 # tell pkg-config where to look for *.pc files
