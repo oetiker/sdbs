@@ -29,6 +29,9 @@ WORKDIR=${WORKDIR:-$PREFIX/src}
 # default
 KEEP=no
 
+# Our own repository with dependencies
+DEPS_ARCHIVE=${DEPS_ARCHIVE:-http://sdbs.oetiker.ch/pub/}
+
 # make sure we find anything we preinstall
 export PATH=$EPREFIX/bin:$PATH
 # tell pkg-config where to look for *.pc files
@@ -162,10 +165,18 @@ function remove () {
 function perlmodule (){
     path=$1;shift
     pack=${1:-""}
-    [ -e $PREFIX/bin/cpanm ] || wget --no-check-certificate -O $PREFIX/bin/cpanm cpanmin.us && chmod 755 $PREFIX/bin/cpanm
+    if [ ! -e $PREFIX/bin/perl -o ! -e $PREFIX/bin/cpanm ]; then
+       echo "Cannot find $PREFIX/bin/perl or $PREFIX/bin/cpanm. Aborting"
+       exit 1
+    fi
     cpanm "$path$pack"
     [ "$KEEP" = "YES" ] || rm -rf $PREFIX/work $PREFIX/latest-build
 }
 
 
 # vim: ft=sh
+
+# Local Variables:
+# mode: shell-script
+# indent-tabs-mode: nil
+# End:

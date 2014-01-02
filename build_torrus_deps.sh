@@ -2,21 +2,26 @@
 
 . `dirname $0`/sdbs.inc
 
-echo "Required prerequisites (recommended to build with SDBS): "
-echo "  perl 5.12.4 or 5.14.2"
-echo "  rrdtool 1.4.5 or higher"
 
-sleep 3
+if [ ! -e $PREFIX/bin/perl ]; then
+    echo "Perl is required at $PREFIX/bin/perl. Aborting."
+    exit 1
+fi
 
-export PATH=$PREFIX/bin:$PATH
+if [ ! -e $PREFIX/bin/rrdtool ]; then
+    echo "RRDTool is required at $PREFIX/bin/rrdtool. Aborting."
+    exit 1
+fi
 
-if prepare http://download.oracle.com/berkeley-db/ db-4.8.30.tar.gz ; then
+
+# http://www.oracle.com/
+if prepare ${DEPS_ARCHIVE} db-6.0.20.tar.gz ; then
     cd build_unix
     ../dist/configure \
         "--prefix=${PREFIX}"
     make
     make install
-    touch $WORKDIR/db-4.8.30.tar.gz.ok
+    touch $WORKDIR/db-6.0.20.tar.gz.ok
 fi
 
 export BERKELEYDB_INCLUDE=$PREFIX/include
