@@ -2,11 +2,23 @@
 
 . `dirname $0`/sdbs.inc
 
-if [ ! -e "$ORACLE_HOME/lib/libnnz11.so" ]; then
-   echo "Make sure to set the ORACLE_HOME variable pointing to the directory where you unpacked instantclient and sdk"   
+if [ x"$ORACLE_HOME" = x ]; then
+   echo ORACLE_HOME is not set
+   exit 1
+fi
+
+for libdir in $ORACLE_HOME/lib $ORACLE_HOME; do
+  if [ -e $libdir/libclntsh.so ]; then
+    break
+  fi
+done
+
+
+if [ ! -e $libdir/libclntsh.so ]; then
+   echo "ORACLE_HOME does not point to Oracle instant client"
    exit 1;
 fi
-export LD_LIBRARY_PATH=$ORACLE_HOME/lib
+export LD_LIBRARY_PATH=$libdir
 
 perlmodule DBI
 perlmodule DBD::Oracle
