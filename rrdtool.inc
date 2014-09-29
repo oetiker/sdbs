@@ -53,8 +53,14 @@ function build_rrdtool_1_4 (){
         CFLAGS="-O3 -fPIC" CPPFLAGS="-I${PREFIX}/include" \
         LDFLAGS="-L${PREFIX}/lib"
 
+    # http://sourceware.org/libffi/
+    simplebuild ${DEPS_ARCHIVE} libffi-3.0.13.tar.gz \
+        CFLAGS="-O3 -fPIC" \
+        CPPFLAGS="-I${PREFIX}/include" \
+        LDFLAGS="-L${PREFIX}/lib"
+
     # http://ftp.gnome.org/pub/gnome/sources/glib/
-    simplebuild ${DEPS_ARCHIVE} glib-2.28.8.tar.xz \
+    simplebuild ${DEPS_ARCHIVE} glib-2.42.0.tar.xz \
         CFLAGS="-O3 -fPIC" \
         CPPFLAGS="-I${PREFIX}/include" \
         LDFLAGS="-L${PREFIX}/lib"
