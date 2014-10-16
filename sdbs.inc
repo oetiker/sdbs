@@ -47,6 +47,11 @@ export PERL=perl
 export PERL_CPANM_HOME="$PREFIX"
 export PERL_CPANM_OPT="--notest --local-lib $PREFIX"
 
+if [ `uname` = SunOS ]; then
+  R="-R"
+else
+  R="-Wl,-rpath -Wl,"
+fi
 
 function prepare () {
  cd $WORKDIR
@@ -165,7 +170,7 @@ function remove () {
 function perlmodule (){
     path=$1;shift
     pack=${1:-""}
-    if [ ! -e $PREFIX/bin/perl -o ! -e $PREFIX/bin/cpanm ]; then
+    if [ ! -e $PREFIX/bin/cpanm ]; then
        echo "Cannot find $PREFIX/bin/perl or $PREFIX/bin/cpanm. Aborting"
        exit 1
     fi

@@ -30,7 +30,7 @@ function build_rrdtool_1_4 (){
 
     # http://sourceforge.net/projects/libpng/files/
     simplebuild ${DEPS_ARCHIVE} libpng-1.6.7.tar.gz \
-        CPPFLAGS="-I${PREFIX}/include" LDFLAGS="-L${PREFIX}/lib"
+        CPPFLAGS="-I${PREFIX}/include" LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
 
     # http://sourceforge.net/projects/expat/files/
     simplebuild ${DEPS_ARCHIVE} expat-2.1.0.tar.gz
@@ -51,19 +51,19 @@ function build_rrdtool_1_4 (){
     simplebuild ${DEPS_ARCHIVE} cairo-1.12.16.tar.xz \
         --enable-xlib=no --enable-xlib-render=no --enable-win32=no  \
         CFLAGS="-O3 -fPIC" CPPFLAGS="-I${PREFIX}/include" \
-        LDFLAGS="-L${PREFIX}/lib"
+        LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
 
     # http://sourceware.org/libffi/
     simplebuild ${DEPS_ARCHIVE} libffi-3.0.13.tar.gz \
         CFLAGS="-O3 -fPIC" \
         CPPFLAGS="-I${PREFIX}/include" \
-        LDFLAGS="-L${PREFIX}/lib"
+        LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
 
     # http://ftp.gnome.org/pub/gnome/sources/glib/
     simplebuild ${DEPS_ARCHIVE} glib-2.42.0.tar.xz \
         CFLAGS="-O3 -fPIC" \
         CPPFLAGS="-I${PREFIX}/include" \
-        LDFLAGS="-L${PREFIX}/lib"
+        LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
 
     # http://ftp.gnome.org/pub/GNOME/sources/pango/
     simplebuild ${DEPS_ARCHIVE} pango-1.28.4.tar.bz2 \
