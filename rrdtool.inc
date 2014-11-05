@@ -22,7 +22,7 @@ function build_rrdtool_1_4 (){
     fi
 
     # http://ftp.gnu.org/pub/gnu/gettext/
-    simplebuild ${DEPS_ARCHIVE} gettext-0.18.3.1.tar.gz \
+    simplebuild ${DEPS_ARCHIVE} gettext-0.18.3.2.tar.gz \
         CFLAGS="-O3 -fPIC" --disable-java
 
     # http://xmlsoft.org/sources/
