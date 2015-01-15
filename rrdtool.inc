@@ -54,11 +54,14 @@ function build_rrdtool_1_4 (){
         LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
 
     # http://sourceware.org/libffi/
-    simplebuild ${DEPS_ARCHIVE} libffi-3.0.13.tar.gz \
+    simplebuild ${DEPS_ARCHIVE} libffi-3.2.1.tar.gz \
         CFLAGS="-O3 -fPIC" \
         CPPFLAGS="-I${PREFIX}/include" \
         LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
 
+    # glib needs python 2.5 or newer
+    ${SDBS_SCRIPTS_DIR}/check_or_build_python2_5.sh
+    
     # http://ftp.gnome.org/pub/gnome/sources/glib/
     simplebuild ${DEPS_ARCHIVE} glib-2.42.0.tar.xz \
         CFLAGS="-O3 -fPIC" \
