@@ -11,11 +11,13 @@ if [ x`which wget` = x ]; then
  exit 1
 fi 
 
+bindir=`dirname "$0"`
+SDBS_SCRIPTS_DIR=`cd $bindir;pwd`
+
 PREFIX=${1:-${PREFIX:-""}}
 
 if [ ${PREFIX:-""} = "" ]; then
-     bindir=`dirname "$0"`
-     PREFIX=`cd $bindir/..;pwd`/thirdparty
+     PREFIX=`cd ${SDBS_SCRIPTS_DIR}/..;pwd`/thirdparty
 fi
 export PREFIX
 echo "Building in $PREFIX"
@@ -58,7 +60,7 @@ function prepare () {
  if [ ! -f $2.ok ]
  then 
    echo "**** doing $2 ****"
-   [ -f $2 ] || wget   --tries=0 --random-wait --passive-ftp $1/$2
+   [ -f $2 ] || wget --no-check-certificate --tries=0 --random-wait --passive-ftp $1/$2
    unset SRCDIR
    [ -f $2.srcdir ] && SRCDIR=`cat $2.srcdir`
    case $2 in
