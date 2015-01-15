@@ -2,11 +2,9 @@
 
 . `dirname $0`/sdbs.inc
 
-if python -V 2>&1 | egrep -q '2.[5-9]'; then
-:
-else
-   simplebuild http://www.python.org/ftp/python/2.7.1 Python-2.7.1.tgz
-fi
+# qooxdoo needs python 2.5 or newer
+${SDBS_SCRIPTS_DIR}/check_or_build_python2_5.sh
+
 
 for module in \
     Mojolicious \
