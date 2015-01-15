@@ -7,6 +7,11 @@ function build_rrdtool_1_4 (){
         exit 1
     fi
     
+    if [ x`which xz` = x ]; then
+        echo "Cannot find xz in PATH. Aborting."
+        exit 1
+    fi
+
     if [ ! -e $PREFIX/bin/perl ]; then
         echo "Perl is required at $PREFIX/bin/perl. Aborting."
         exit 1
