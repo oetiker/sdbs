@@ -2,4 +2,4 @@
 . `dirname $0`/sdbs.inc
 . `dirname $0`/perl.inc
 
-build_perl5 5.20.2
+build_perl5 5.22.0
