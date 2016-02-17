@@ -45,15 +45,18 @@ function build_rrdtool_1_4 (){
 
     # http://www.freedesktop.org/software/fontconfig/release/
     simplebuild ${DEPS_ARCHIVE} fontconfig-2.11.0.tar.gz CFLAGS="-O3 -fPIC"
+
+    # https://www.freedesktop.org/software/harfbuzz/release/
+    simplebuild ${DEPS_ARCHIVE} harfbuzz-1.1.3.tar.bz2 CFLAGS="-O3 -fPIC"
     
     # http://cairographics.org/releases/
-    simplebuild ${DEPS_ARCHIVE} pixman-0.32.4.tar.gz \
+    simplebuild ${DEPS_ARCHIVE} pixman-0.32.8.tar.gz \
         CFLAGS="-O3 -fPIC" \
         --disable-static-testprogs \
         --disable-gtk        
 
     # http://cairographics.org/releases/
-    simplebuild ${DEPS_ARCHIVE} cairo-1.12.16.tar.xz \
+    simplebuild ${DEPS_ARCHIVE} cairo-1.14.6.tar.xz \
         --enable-xlib=no --enable-xlib-render=no --enable-win32=no  \
         CFLAGS="-O3 -fPIC" CPPFLAGS="-I${PREFIX}/include" \
         LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
@@ -74,8 +77,8 @@ function build_rrdtool_1_4 (){
         LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
 
     # http://ftp.gnome.org/pub/GNOME/sources/pango/
-    simplebuild ${DEPS_ARCHIVE} pango-1.28.4.tar.bz2 \
-        --without-x CFLAGS="-O3 -fPIC"
+    simplebuild ${DEPS_ARCHIVE} pango-1.39.0.tar.xz \
+        CFLAGS="-O3 -fPIC"
 
     simplebuild http://oss.oetiker.ch/rrdtool/pub/ \
         rrdtool-${RRDTOOL_VER}.tar.gz \

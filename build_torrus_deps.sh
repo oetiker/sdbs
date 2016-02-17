@@ -15,13 +15,13 @@ fi
 
 
 # http://www.oracle.com/
-if prepare ${DEPS_ARCHIVE} db-6.0.20.tar.gz ; then
+if prepare ${DEPS_ARCHIVE} db-6.1.26.tar.gz ; then
     cd build_unix
     ../dist/configure \
         "--prefix=${PREFIX}"
     make
     make install
-    touch $WORKDIR/db-6.0.20.tar.gz.ok
+    touch $WORKDIR/db-6.1.26.tar.gz.ok
 fi
 
 export BERKELEYDB_INCLUDE=$PREFIX/include
