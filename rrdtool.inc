@@ -30,12 +30,28 @@ function build_rrdtool_1_4 (){
     simplebuild ${DEPS_ARCHIVE} gettext-0.18.3.2.tar.gz \
         CFLAGS="-O3 -fPIC" --disable-java
 
+    # http://sourceware.org/libffi/
+    simplebuild ${DEPS_ARCHIVE} libffi-3.2.1.tar.gz \
+        CFLAGS="-O3 -fPIC" \
+        CPPFLAGS="-I${PREFIX}/include" \
+        LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
+
+    # glib needs python 2.5 or newer
+    ${SDBS_SCRIPTS_DIR}/check_or_build_python2_5.sh
+    
+    # http://ftp.gnome.org/pub/gnome/sources/glib/
+    simplebuild ${DEPS_ARCHIVE} glib-2.42.0.tar.xz \
+        CFLAGS="-O3 -fPIC" \
+        CPPFLAGS="-I${PREFIX}/include" \
+        LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
+    
     # http://xmlsoft.org/sources/
     simplebuild ${DEPS_ARCHIVE} libxml2-2.9.1.tar.gz --without-python
 
     # http://sourceforge.net/projects/libpng/files/
     simplebuild ${DEPS_ARCHIVE} libpng-1.6.7.tar.gz \
-        CPPFLAGS="-I${PREFIX}/include" LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
+        CPPFLAGS="-I${PREFIX}/include" \
+        LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
 
     # http://sourceforge.net/projects/expat/files/
     simplebuild ${DEPS_ARCHIVE} expat-2.1.0.tar.gz
@@ -59,21 +75,6 @@ function build_rrdtool_1_4 (){
     simplebuild ${DEPS_ARCHIVE} cairo-1.14.6.tar.xz \
         --enable-xlib=no --enable-xlib-render=no --enable-win32=no  \
         CFLAGS="-O3 -fPIC" CPPFLAGS="-I${PREFIX}/include" \
-        LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
-
-    # http://sourceware.org/libffi/
-    simplebuild ${DEPS_ARCHIVE} libffi-3.2.1.tar.gz \
-        CFLAGS="-O3 -fPIC" \
-        CPPFLAGS="-I${PREFIX}/include" \
-        LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
-
-    # glib needs python 2.5 or newer
-    ${SDBS_SCRIPTS_DIR}/check_or_build_python2_5.sh
-    
-    # http://ftp.gnome.org/pub/gnome/sources/glib/
-    simplebuild ${DEPS_ARCHIVE} glib-2.42.0.tar.xz \
-        CFLAGS="-O3 -fPIC" \
-        CPPFLAGS="-I${PREFIX}/include" \
         LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
 
     # http://ftp.gnome.org/pub/GNOME/sources/pango/
