@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export PERL=/usr/bin/perl
+id rt4 >/dev/null 2>&1 || ( echo rt4 user is missing; exit 1 )
 
 . `dirname $0`/sdbs.inc
 if prepare https://download.bestpractical.com/pub/rt/release/ rt-4.4.1.tar.gz; then
