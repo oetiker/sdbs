@@ -17,6 +17,7 @@ if prepare https://download.bestpractical.com/pub/rt/release/ rt-4.4.2.tar.gz; t
     perlmodule HTML::Gumbo
     make testdeps
     make install
+    bash
 fi
 
 
