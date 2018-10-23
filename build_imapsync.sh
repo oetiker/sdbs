@@ -8,10 +8,7 @@ wget --no-check-certificate -O $PREFIX/bin/cpanm cpanmin.us && chmod 755 $PREFIX
 
 
 KEEP=yes
-#perlmodule Starman
-#perlmodule HTML::Gumbo
-
-perlmodule  Digest::HMAC_MD5
+perlmodule Digest::HMAC_MD5
 perlmodule File::Temp
 perlmodule Term::ReadKey
 perlmodule Parse::RecDescent
@@ -27,8 +24,13 @@ perlmodule Unicode::String
 perlmodule Readonly
 perlmodule Sys::MemInfo
 perlmodule Regexp::Common
+perlmodule Authen::NTLM
+perlmodule Crypt::OpenSSL::RSA
+perlmodule Data::Uniqid
+perlmodule JSON::WebToken
+perlmodule Test::MockObject
 
 if prepare http://imapsync.lamiral.info/dist imapsync-1.882.tgz
    then
-   echo done
+   cp imapsync $PREFIX/bin
 fi
