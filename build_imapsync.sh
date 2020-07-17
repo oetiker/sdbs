@@ -9,7 +9,9 @@ wget --no-check-certificate -O $PREFIX/bin/cpanm cpanmin.us && chmod 755 $PREFIX
 
 KEEP=yes
 perlmodule Digest::HMAC_MD5
+perlmodule Digest::HMAC_SHA1
 perlmodule File::Temp
+perlmodule File::Tail
 perlmodule Term::ReadKey
 perlmodule Parse::RecDescent
 perlmodule Test::Harness
@@ -29,6 +31,7 @@ perlmodule Crypt::OpenSSL::RSA
 perlmodule Data::Uniqid
 perlmodule JSON::WebToken
 perlmodule Test::MockObject
+perlmodule Encode::IMAPUTF7
 
 if prepare http://imapsync.lamiral.info/dist imapsync-1.977.tgz
    then
