@@ -30,7 +30,7 @@ perlmodule Data::Uniqid
 perlmodule JSON::WebToken
 perlmodule Test::MockObject
 
-if prepare http://imapsync.lamiral.info/dist imapsync-1.882.tgz
+if prepare http://imapsync.lamiral.info/dist imapsync-1.977.tgz
    then
    cp imapsync $PREFIX/bin
 fi
