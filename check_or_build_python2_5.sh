@@ -15,7 +15,7 @@ else
 fi
 
 if [ $build_python = yes ]; then
-    simplebuild https://www.python.org/ftp/python/2.7.9/ Python-2.7.9.tgz
+    simplebuild https://www.python.org/ftp/python/2.7.18/ Python-2.7.18.tgz
 fi
 
 
