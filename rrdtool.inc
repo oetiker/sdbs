@@ -9,9 +9,9 @@ function mesonbuild (){
          LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib ${R}${PREFIX}/lib64 -L${PREFIX}/lib64" \
          ${PREFIX}/bin/meson setup --prefix $PREFIX "$@" _build \
          2>&1 | tee -a ${WORKDIR}/${simpleprogram}.output
-   if [ $? -ne 0 ]; then exit 1; fi
+   [ ${PIPESTATUS[0]} = 0 ] || exit ${PIPESTATUS[0]}     
    ${PREFIX}/bin/ninja -C _build install 2>&1 | tee -a ${WORKDIR}/${simpleprogram}.output
-   if [ $? -ne 0 ]; then exit 1; fi
+   [ ${PIPESTATUS[0]} = 0 ] || exit ${PIPESTATUS[0]}     
    remove 
    touch ${WORKDIR}/${simpleprogram}.ok
  fi
@@ -69,14 +69,12 @@ function build_rrdtool_1_4 (){
     $PREFIX/bin/python3 -m pip install ninja
     if [ $? -ne 0 ]; then exit 1; fi
 
-    # gobject-introspection is required by fribidi
-    # https://gi.readthedocs.io/en/latest/
-    mesonbuild ${DEPS_ARCHIVE} gobject-introspection-1.64.1.tar.xz
-
     # http://ftp.gnome.org/pub/gnome/sources/glib/
     mesonbuild ${DEPS_ARCHIVE} glib-2.65.0.tar.xz
                 
-        
+    # gobject-introspection is required by fribidi
+    # https://gi.readthedocs.io/en/latest/
+    mesonbuild ${DEPS_ARCHIVE} gobject-introspection-1.64.1.tar.xz
     
     # http://sourceforge.net/projects/libpng/files/
     simplebuild ${DEPS_ARCHIVE} libpng-1.6.37.tar.gz \
