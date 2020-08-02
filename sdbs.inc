@@ -39,6 +39,7 @@ export PATH=$EPREFIX/bin:$PATH
 # tell pkg-config where to look for *.pc files
 export PKG_CONFIG_PATH=$EPREFIX/lib64/pkgconfig:$EPREFIX/lib/pkgconfig
 # just to make sure those who are not compiled propperly still work
+export LD_RUN_PATH=$EPREFIX/lib64:$EPREFIX/lib
 export LD_LIBRARY_PATH=$EPREFIX/lib64:$EPREFIX/lib
 # find our own perl modules
 export PERL5LIB=$EPREFIX/lib/perl5
