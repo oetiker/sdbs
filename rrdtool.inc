@@ -51,17 +51,14 @@ function build_rrdtool_1_4 (){
     if [ $? -ne 0 ]; then exit 1; fi
 
     # http://ftp.gnome.org/pub/gnome/sources/glib/
-    if prepare http://ftp.gnome.org/pub/gnome/sources/glib/2.65/ glib-2.65.0.tar.xz; then
-        if CFLAGS="-O3 -fPIC" CPPFLAGS="-I${PREFIX}/include" \
-                 LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib" ${PREFIX}/bin/meson _build; then
-            if ${PREFIX}/bin/ninja -C _build install; then
-                touch $WORKDIR/glib-2.65.0.tar.xz.ok
-            else
-                exit 1
-            fi
-        else
-            exit 1
-        fi
+    if prepare ${DEPS_ARCHIVE} glib-2.65.0.tar.xz; then
+        CFLAGS="-O3 -fPIC" CPPFLAGS="-I${PREFIX}/include" \
+              LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib ${R}${PREFIX}/lib64 -L${PREFIX}/lib64" \
+              ${PREFIX}/bin/meson setup --prefix $PREFIX _build
+        if [ $? -ne 0 ]; then exit 1; fi
+        ${PREFIX}/bin/ninja -C _build install
+        if [ $? -ne 0 ]; then exit 1; fi
+        touch $WORKDIR/glib-2.65.0.tar.xz.ok
     fi
                 
         
@@ -85,7 +82,16 @@ function build_rrdtool_1_4 (){
     simplebuild ${DEPS_ARCHIVE} fontconfig-2.13.92.tar.gz CFLAGS="-O3 -fPIC"
 
     # https://www.freedesktop.org/software/harfbuzz/release/
-    simplebuild ${DEPS_ARCHIVE} harfbuzz-2.6.7.tar.xz CFLAGS="-O3 -fPIC"
+    if prepare ${DEPS_ARCHIVE} harfbuzz-2.7.0.tar.gz; then
+        CFLAGS="-O3 -fPIC" CPPFLAGS="-I${PREFIX}/include" \
+              LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib ${R}${PREFIX}/lib64 -L${PREFIX}/lib64" \
+              ${PREFIX}/bin/meson setup --prefix $PREFIX -Dbenchmark=disabled _build
+        if [ $? -ne 0 ]; then exit 1; fi
+        ${PREFIX}/bin/ninja -C _build install
+        if [ $? -ne 0 ]; then exit 1; fi
+        touch $WORKDIR/harfbuzz-2.7.0.tar.gz.ok
+    fi
+
     
     # http://cairographics.org/releases/
     simplebuild ${DEPS_ARCHIVE} pixman-0.40.0.tar.gz \
@@ -99,9 +105,42 @@ function build_rrdtool_1_4 (){
         CFLAGS="-O3 -fPIC" CPPFLAGS="-I${PREFIX}/include" \
         LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
 
+    # gobject-introspection is required by fribidi
+    # https://gi.readthedocs.io/en/latest/
+    if prepare ${DEPS_ARCHIVE} gobject-introspection-1.64.1.tar.xz; then
+        CFLAGS="-O3 -fPIC" CPPFLAGS="-I${PREFIX}/include" \
+              LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib ${R}${PREFIX}/lib64 -L${PREFIX}/lib64" \
+              ${PREFIX}/bin/meson setup --prefix $PREFIX _build
+        if [ $? -ne 0 ]; then exit 1; fi
+        ${PREFIX}/bin/ninja -C _build install
+        if [ $? -ne 0 ]; then exit 1; fi
+        touch $WORKDIR/gobject-introspection-1.64.1.tar.xz.ok
+    fi
+    
+    
+    # fribidi is needed by pango
+    # https://github.com/fribidi/fribidi
+    if prepare ${DEPS_ARCHIVE} fribidi-1.0.10.tar.xz; then
+        CFLAGS="-O3 -fPIC" CPPFLAGS="-I${PREFIX}/include" \
+              LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib ${R}${PREFIX}/lib64 -L${PREFIX}/lib64" \
+              ${PREFIX}/bin/meson setup --prefix $PREFIX _build
+        if [ $? -ne 0 ]; then exit 1; fi
+        ${PREFIX}/bin/ninja -C _build install
+        if [ $? -ne 0 ]; then exit 1; fi
+        touch $WORKDIR/fribidi-1.0.10.tar.xz.ok
+    fi
+
+    
     # http://ftp.gnome.org/pub/GNOME/sources/pango/
-    simplebuild ${DEPS_ARCHIVE} pango-1.45.4.tar.xz \
-        CFLAGS="-O3 -fPIC"
+    if prepare ${DEPS_ARCHIVE} pango-1.45.4.tar.xz; then
+        CFLAGS="-O3 -fPIC" CPPFLAGS="-I${PREFIX}/include" \
+              LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib ${R}${PREFIX}/lib64 -L${PREFIX}/lib64" \
+              ${PREFIX}/bin/meson setup --prefix $PREFIX _build
+        if [ $? -ne 0 ]; then exit 1; fi
+        ${PREFIX}/bin/ninja -C _build install
+        if [ $? -ne 0 ]; then exit 1; fi
+        touch $WORKDIR/pango-1.45.4.tar.xz.ok
+    fi
 
     simplebuild http://oss.oetiker.ch/rrdtool/pub/ \
         rrdtool-${RRDTOOL_VER}.tar.gz \
