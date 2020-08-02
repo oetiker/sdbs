@@ -116,7 +116,7 @@ function build_rrdtool_1_4 (){
     mesonbuild ${DEPS_ARCHIVE} fribidi-1.0.10.tar.xz
     
     # http://ftp.gnome.org/pub/GNOME/sources/pango/
-    mesonbuild pango-1.45.4.tar.xz
+    mesonbuild ${DEPS_ARCHIVE} pango-1.45.4.tar.xz
 
     simplebuild http://oss.oetiker.ch/rrdtool/pub/ \
         rrdtool-${RRDTOOL_VER}.tar.gz \
