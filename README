@@ -17,6 +17,14 @@ By default the script will build and install everything in ../thirdparty
 relative to its own location. You can call the script with an argument
 if you want the installation to go somewhere else.
 
+OS packages needed for building the software (`gcc-c++, `flex` and
+`bison` are required for RRDtool builder):
+
+```
+yum install -y git gcc gcc-c++ make libtool xz bzip2 wget flex bison
+```
+
+
 Enjoy!
 
 Tobi Oetiker <tobi@oetiker.ch>
