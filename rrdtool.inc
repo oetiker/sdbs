@@ -6,8 +6,8 @@ function mesonbuild (){
    simpleprogram=$1;shift
    
    CFLAGS="-O3 -fPIC" CPPFLAGS="-I${PREFIX}/include" \
-         LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib ${R}${PREFIX}/lib64 -L${PREFIX}/lib64" \
-         ${PREFIX}/bin/meson setup --prefix $PREFIX "$@" _build \
+         LDFLAGS="${R}${SDBS_LIBDIR} -L${SDBS_LIBDIR}" \
+         ${PREFIX}/bin/meson setup --prefix $PREFIX --libdir=${SDBS_LIBDIR} "$@" _build \
          2>&1 | tee -a ${WORKDIR}/${simpleprogram}.output
    [ ${PIPESTATUS[0]} = 0 ] || exit ${PIPESTATUS[0]}     
    ${PREFIX}/bin/ninja -C _build install 2>&1 | tee -a ${WORKDIR}/${simpleprogram}.output
@@ -40,22 +40,23 @@ function build_rrdtool_1_4 (){
     # have to set LDFLAGS and CPPFLAGS explicitly
     # https://zlib.net/
     if prepare ${DEPS_ARCHIVE} zlib-1.2.11.tar.gz; then
-        CFLAGS="-O3 -fPIC" ./configure --prefix=$PREFIX
+        CFLAGS="-O3 -fPIC" ./configure --prefix=$PREFIX --libdir=${SDBS_LIBDIR}
         CFLAGS="-O3 -fPIC" make install
         touch $WORKDIR/zlib-1.2.11.tar.gz.ok
+        remove
     fi
 
     # http://ftp.gnu.org/pub/gnu/gettext/
     simplebuild ${DEPS_ARCHIVE} gettext-0.20.tar.gz \
         CFLAGS="-O3 -fPIC" --disable-java \
-        LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib" \
+        LDFLAGS="${R}${SDBS_LIBDIR} -L${SDBS_LIBDIR}" \
         --without-emacs
 
     # http://sourceware.org/libffi/
     simplebuild ${DEPS_ARCHIVE} libffi-3.3.tar.gz \
         CFLAGS="-O3 -fPIC" \
         CPPFLAGS="-I${PREFIX}/include" \
-        LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
+        LDFLAGS="${R}${SDBS_LIBDIR} -L${SDBS_LIBDIR}"
 
     # http://xmlsoft.org/sources/
     simplebuild ${DEPS_ARCHIVE} libxml2-2.9.10.tar.gz --without-python
@@ -79,7 +80,7 @@ function build_rrdtool_1_4 (){
     # http://sourceforge.net/projects/libpng/files/
     simplebuild ${DEPS_ARCHIVE} libpng-1.6.37.tar.gz \
         CPPFLAGS="-I${PREFIX}/include" \
-        LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib"
+        LDFLAGS="${R}${SDBS_LIBDIR} -L${SDBS_LIBDIR}"
 
     # http://sourceforge.net/projects/expat/files/
     simplebuild ${DEPS_ARCHIVE} expat-2.2.9.tar.gz
@@ -107,7 +108,7 @@ function build_rrdtool_1_4 (){
     simplebuild ${DEPS_ARCHIVE} cairo-1.16.0.tar.xz \
         --enable-xlib=no --enable-xlib-render=no --enable-win32=no  \
         CFLAGS="-O3 -fPIC" CPPFLAGS="-I${PREFIX}/include" \
-        LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib ${R}${PREFIX}/lib64 -L${PREFIX}/lib64"
+        LDFLAGS="${R}${SDBS_LIBDIR} -L${SDBS_LIBDIR}"
     
     # fribidi is needed by pango
     # https://github.com/fribidi/fribidi
@@ -119,7 +120,7 @@ function build_rrdtool_1_4 (){
     simplebuild http://oss.oetiker.ch/rrdtool/pub/ \
         rrdtool-${RRDTOOL_VER}.tar.gz \
         --with-perl-options="PREFIX=$PREFIX LIB=$PREFIX/lib/perl5" \
-        LDFLAGS="${R}${PREFIX}/lib -L${PREFIX}/lib ${R}${PREFIX}/lib64 -L${PREFIX}/lib64"
+        LDFLAGS="${R}${SDBS_LIBDIR} -L${SDBS_LIBDIR}"
 }
 
 
