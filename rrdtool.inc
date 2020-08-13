@@ -117,10 +117,14 @@ function build_rrdtool_1_4 (){
     # http://ftp.gnome.org/pub/GNOME/sources/pango/
     mesonbuild ${DEPS_ARCHIVE} pango-1.45.4.tar.xz
 
+    if [ `id -u` -ne 0 ]; then
+        SKIP_SYSTEMD_UNIT='--with-systemdsystemunitdir=no'
+    fi
+
     simplebuild http://oss.oetiker.ch/rrdtool/pub/ \
         rrdtool-${RRDTOOL_VER}.tar.gz \
         --with-perl-options="PREFIX=$PREFIX LIB=$PREFIX/lib/perl5" \
-        LDFLAGS="${R}${SDBS_LIBDIR} -L${SDBS_LIBDIR}"
+        LDFLAGS="${R}${SDBS_LIBDIR} -L${SDBS_LIBDIR}" ${SKIP_SYSTEMD_UNIT}
 }
 
 
