@@ -28,6 +28,16 @@ WORKDIR=${WORKDIR:-$PREFIX/src}
 [ -d $PREFIX/bin ] || mkdir -p $PREFIX/bin
 [ -d $WORKDIR ] || mkdir -p $WORKDIR
 
+if [ ${SDBS_LIBDIR:-""} = "" ]; then
+    if [ `getconf LONG_BIT` -eq 64 ]; then
+        SDBS_LIBDIR=$EPREFIX/lib64
+    else
+        SDBS_LIBDIR=$EPREFIX/lib
+    fi
+fi
+
+
+    
 # default
 KEEP=no
 
@@ -37,10 +47,9 @@ DEPS_ARCHIVE=${DEPS_ARCHIVE:-http://sdbs.oetiker.ch/pub/}
 # make sure we find anything we preinstall
 export PATH=$EPREFIX/bin:$PATH
 # tell pkg-config where to look for *.pc files
-export PKG_CONFIG_PATH=$EPREFIX/lib64/pkgconfig:$EPREFIX/lib/pkgconfig
+export PKG_CONFIG_PATH=${SDBS_LIBDIR}/pkgconfig
 # just to make sure those who are not compiled propperly still work
-export LD_RUN_PATH=$EPREFIX/lib64:$EPREFIX/lib
-export LD_LIBRARY_PATH=$EPREFIX/lib64:$EPREFIX/lib
+export LD_LIBRARY_PATH=${SDBS_LIBDIR}
 # find our own perl modules
 export PERL5LIB=$EPREFIX/lib/perl5
 if [ ${PERL:-x} != x ]; then
@@ -133,7 +142,8 @@ function simplebuild (){
    fi
    if test !  -f config.log  -o ! -f Makefile -o   "$answer" = y  -o  "$answer" = Y ; then
      rm -f config.cache 
-     ./configure --exec-prefix=$EPREFIX --prefix=$PREFIX "$@"    2>&1 | tee -a $upone/../${simpleprogram}.output
+     ./configure --exec-prefix=$EPREFIX --prefix=$PREFIX "$@" --libdir=${SDBS_LIBDIR} \
+                 2>&1 | tee -a $upone/../${simpleprogram}.output
      [ ${PIPESTATUS[0]} = 0 ] || exit ${PIPESTATUS[0]}     
      if [ -f $WORKDIR/patch.post ]; then
         gpatch -p0 -l <$WORKDIR/patch.post 
