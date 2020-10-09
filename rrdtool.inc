@@ -54,6 +54,7 @@ function build_rrdtool_1_4 (){
 
     # http://sourceware.org/libffi/
     simplebuild ${DEPS_ARCHIVE} libffi-3.3.tar.gz \
+        enable_multi_os_directory=no \
         CFLAGS="-O3 -fPIC" \
         CPPFLAGS="-I${PREFIX}/include" \
         LDFLAGS="${R}${SDBS_LIBDIR} -L${SDBS_LIBDIR}"
@@ -119,6 +120,8 @@ function build_rrdtool_1_4 (){
 
     if [ `id -u` -ne 0 ]; then
         SKIP_SYSTEMD_UNIT='--with-systemdsystemunitdir=no'
+    else
+        SKIP_SYSTEMD_UNIT=''
     fi
 
     simplebuild http://oss.oetiker.ch/rrdtool/pub/ \
