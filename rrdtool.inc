@@ -79,6 +79,9 @@ function build_rrdtool_1_4 (){
     # distutils is required by gobject-introspection; setuptools replaces distutils
     $PREFIX/bin/python3 -m pip install setuptools
     if [ $? -ne 0 ]; then exit 1; fi
+    # patchelf fixes the RPATH in libraries because meson strips it off
+    $PREFIX/bin/python3 -m pip install patchelf
+    if [ $? -ne 0 ]; then exit 1; fi
 
     # flex and bison required by gobject-introspection
     # https://github.com/westes/flex
