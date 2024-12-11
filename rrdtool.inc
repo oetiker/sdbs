@@ -90,17 +90,17 @@ function build_rrdtool_1_4 (){
     # http://ftp.gnu.org/gnu/bison/
     simplebuild ${DEPS_ARCHIVE} bison-3.8.tar.xz
      
-    if [ ! -e ${WORKDIR}/glib-2.79.1.tar.xz.ok -o ! -e ${WORKDIR}/gobject-introspection-1.79.1.tar.xz.ok ]; then
+    if [ ! -e ${WORKDIR}/glib-2.82.3.tar.xz.ok -o ! -e ${WORKDIR}/gobject-introspection-1.82.0.tar.xz.ok ]; then
         # see the explanation for the weird build procedure at https://docs.gtk.org/glib/building.html
         # http://ftp.gnome.org/pub/gnome/sources/glib/
-        mesonbuild ${DEPS_ARCHIVE} glib-2.79.1.tar.xz -Dintrospection=disabled
-        rm ${WORKDIR}/glib-2.79.1.tar.xz.ok
+        mesonbuild ${DEPS_ARCHIVE} glib-2.82.3.tar.xz -Dintrospection=disabled
+        rm ${WORKDIR}/glib-2.82.3.tar.xz.ok
 
         # gobject-introspection is required by fribidi
         # https://gi.readthedocs.io/en/latest/
-        mesonbuild ${DEPS_ARCHIVE} gobject-introspection-1.79.1.tar.xz
+        mesonbuild ${DEPS_ARCHIVE} gobject-introspection-1.82.0.tar.xz
     
-        mesonbuild ${DEPS_ARCHIVE} glib-2.79.1.tar.xz -Dintrospection=enabled
+        mesonbuild ${DEPS_ARCHIVE} glib-2.82.3.tar.xz -Dintrospection=enabled
     fi
 
     # http://sourceforge.net/projects/libpng/files/
