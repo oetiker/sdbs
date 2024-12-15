@@ -17,7 +17,8 @@ function build_perl5 () {
             -Dprefix=$PREFIX \
             -Dperlpath="$PREFIX/bin/perl" \
             -Dstartperl="#!$PREFIX/bin/perl" \
-            -Aldflags="${R}${SDBS_LIBDIR} -L${SDBS_LIBDIR}" \
+            -A prepend:ldflags="${R}${SDBS_LIBDIR} -L${SDBS_LIBDIR}" \
+            -A prepend:cppflags="-I${PREFIX}/include" \
             -Dusethreads -de
         make
         make install
